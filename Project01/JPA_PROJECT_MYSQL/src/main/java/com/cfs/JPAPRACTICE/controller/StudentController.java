@@ -4,9 +4,7 @@ package com.cfs.JPAPRACTICE.controller;
 import com.cfs.JPAPRACTICE.entity.Student;
 import com.cfs.JPAPRACTICE.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,5 +19,21 @@ public class StudentController {
     @GetMapping("/all")
     public List<Student> getAllStudent(){
         return service.getAllStudentData();
+    }
+
+    @PostMapping("/save")
+    public Student saveStudent(@RequestBody Student student){
+        return service.saveStudent(student);
+    }
+
+    @GetMapping("/{id}")
+    public Student getById(@PathVariable Long id){
+        return service.getStudentById(id);
+    }
+
+    @DeleteMapping("/{id}")
+    public String deleteById(@PathVariable Long id){
+        service.deleteById(id);
+        return "Student deleted successfully";
     }
 }

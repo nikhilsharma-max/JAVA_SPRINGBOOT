@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class StudentService {
@@ -16,5 +17,18 @@ public class StudentService {
 
     public List<Student> getAllStudentData(){
         return (List<Student> ) repository.findAll();
+    }
+
+    public Student saveStudent(Student student){
+        return repository.save(student);
+    }
+
+    public Student getStudentById(Long id){
+        return repository.findById(id)
+                .orElseThrow(()-> new RuntimeException("Student not found"));
+    }
+
+    public void deleteById(Long id){
+         repository.deleteById(id);
     }
 }
