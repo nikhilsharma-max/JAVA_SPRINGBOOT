@@ -2,6 +2,7 @@ package com.cfs.BookMyShow.entity;
 
 import jakarta.persistence.*;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Entity
@@ -15,12 +16,22 @@ public class Show {
     @ManyToOne(fetch = FetchType.LAZY,optional = false)
     private Movie movie;
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     @ManyToOne(fetch = FetchType.LAZY,optional = false)
     private Theatre theatre;//Show ke respect mai theatre
 
     private LocalDateTime startAt;
 
     private LocalDateTime endsAt;
+
+    private BigDecimal ticketPrice;
 
     private int totalSeats;
 
@@ -31,13 +42,22 @@ public class Show {
     @Version
     private Long version;
 
-    public Show(Movie movie, Theatre theatre, LocalDateTime startAt, LocalDateTime endsAt, int totalSeats, int availableSeats) {
+    public BigDecimal getTicketPrice() {
+        return ticketPrice;
+    }
+
+    public void setTicketPrice(BigDecimal ticketPrice) {
+        this.ticketPrice = ticketPrice;
+    }
+
+    public Show(Movie movie, Theatre theatre, LocalDateTime startAt, LocalDateTime endsAt, BigDecimal ticketPrice , int totalSeats) {
         this.movie = movie;
         this.theatre = theatre;
         this.startAt = startAt;
         this.endsAt = endsAt;
         this.totalSeats = totalSeats;
-        this.availableSeats = availableSeats;
+        this.ticketPrice = ticketPrice;
+        this.availableSeats = totalSeats;
     }
 
 
